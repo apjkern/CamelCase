@@ -8,4 +8,4 @@
 ![name](doc/show2.png)
 
 ###下载
-[v0.1.0](https://gitea.xzp.ink/XuZhiJie/CamelCase/src/tag/release/v0.1.0/doc/CamelCase_v0.1.0_for_idea_2018.3.jar)
+[v0.1.0](doc/CamelCase_v0.1.0_for_idea_2018.3.jar)
