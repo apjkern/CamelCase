@@ -1,5 +1,5 @@
 <idea-plugin>
-    <id>com.your.company.unique.plugin.id</id>
+    <id>com.bitnei.idea.plugin.action.CamelCaseConvert</id>
     <name>英文下划线转驼峰</name>
     <version>1.0</version>
     <vendor email="976778267@qq.com" url="http://www.bitnei.cn">许智杰 群：160590699</vendor>
@@ -11,9 +11,19 @@
         <li>VEH_ID 转成 vehId</li>
         <li>FENCE_ID 转成 fenceId</li>
       </ul>
+      <br/>
+      static变量转驼峰大写<br/>
+      <p>例：</p>
+      <ul>
+        <li>carLowSocJudge 转成 CAR_LOW_SOC_JUDGE</li>
+      </ul>
     ]]></description>
 
     <change-notes><![CDATA[
+      版本 0.1.1 <br/>
+      ===========================================<br/>
+      添加static变量转驼峰大写功能
+      <br/><br/>
       版本 0.1.0 <br/>
       ===========================================<br/>
       将英文下划线组件转成驼峰写法
@@ -39,6 +49,11 @@
                 text="英文下划线转驼峰" description="英文下划线转驼峰">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
             <keyboard-shortcut keymap="$default" first-keystroke="alt C"/>
+        </action>
+        <action id="com.bitnei.idea.plugin.action.StaticVariableConvert"
+                class="com.bitnei.idea.plugin.action.StaticVariableConvert" text="静态变量转大写" description="静态变量转大写">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="alt V"/>
         </action>
     </actions>
 

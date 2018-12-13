@@ -7,19 +7,19 @@ import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
 import org.apache.http.util.TextUtils;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 将选中的[英文字母_英文字母]转驼峰
  * @author 智杰
  */
-public class CamelCaseConvert extends AnAction {
-    private static final Pattern PROPERTIES_MATCH_PATTERN = Pattern.compile("[_][a-zA-Z]");
+public class StaticVariableConvert extends AnAction {
+    private static final Pattern PROPERTIES_MATCH_PATTERN = Pattern.compile("[A-Z]+");
 
     @Override
-    public void actionPerformed(AnActionEvent e) {
+    public void actionPerformed(@NotNull final AnActionEvent e) {
         //获取编辑器
         final Editor editor = e.getData(PlatformDataKeys.EDITOR);
         if (null == editor) {
@@ -29,11 +29,6 @@ public class CamelCaseConvert extends AnAction {
         SelectionModel selectionModel = editor.getSelectionModel();
         String selectedText = selectionModel.getSelectedText();
         if (TextUtils.isEmpty(selectedText)) {
-            return;
-        }
-
-        //格式检查
-        if( !selectedText.contains("_") ){
             return;
         }
 
@@ -51,25 +46,16 @@ public class CamelCaseConvert extends AnAction {
         });
     }
 
-
-    /**
-     * 所有properties中的key包含. _符号的都转换为首字母大写
-     * 示例
-     * storm.worker.no 对应 stormWorkerNo
-     * storm.kafka.spout.no 对应 stormKafkaSpoutNo
-     * kafka.producer.vehicle_notice.topic 对应 kafkaProducerVehicleNoticeTopic
-     *
-     * @param key
-     * @return
-     */
     private String keyConvertAttributeName(String key) {
-        key = key.toLowerCase();
         Matcher m = PROPERTIES_MATCH_PATTERN.matcher(key);
         while (m.find()) {
             String matchString = m.group();
-            String upperCaseString = matchString.toUpperCase().substring(1);
-            key = key.replace(matchString, upperCaseString);
+            if( !key.startsWith(matchString) ){
+                key = key.replace(matchString, "_" + matchString);
+            }else{
+                key = key.replace(matchString, matchString);
+            }
         }
-        return key;
+        return key.toUpperCase().replaceAll("_+", "_");
     }
 }
