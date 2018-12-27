@@ -55,6 +55,11 @@
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
             <keyboard-shortcut keymap="$default" first-keystroke="alt V"/>
         </action>
+        <action id="com.bitnei.idea.plugin.action.PropertiesToAttributeConvert"
+                class="com.bitnei.idea.plugin.action.PropertiesToAttributeConvert" text="properties转类属性" description="properties转类属性">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="alt B"/>
+        </action>
     </actions>
 
 </idea-plugin>
